@@ -164,7 +164,75 @@ const addComputersData = (computers) => {
     }
 }
 
+/**
+ * Method for showing the selected data from the API from title
+ * @param {*} computer takes the API data as a parameter
+ * @returns the computer value
+ */
+const addComputersDataToSelect = (computer) => {
+    const computerElement = document.createElement("option");
+    computerElement.value = computer.id;
+    computerElement.appendChild(document.createTextNode(computer.title));
+    dataOutput.appendChild(computerElement);
+    return computerElement.value
+}
+
+/**
+ * Method for taking the selected value and returning the specs and image values 
+ */
+function handleComputerDataChange() {
+    const selectedId = this.value;
+    const selectedComputer = computerApi.find(computer => computer.id == selectedId);
+    img.src = `https://hickory-quilled-actress.glitch.me/${selectedComputer.image}`;
+    if(selectedComputer.id == 5){
+        img.src= "https://hickory-quilled-actress.glitch.me/assets/images/5.png";
+    }
+    laptopHeader.innerHTML = selectedComputer.title;
+    price.innerHTML = selectedComputer.price;
+    if (selectedComputer) {
+        dataSpec.innerText = selectedComputer.description;
+        def.innerHTML = "";
+        selectedComputer.specs.forEach(spec => {
+            const p = document.createElement("p");
+            p.innerText = spec;
+            def.appendChild(p);
+        });
+    }
+}
+
+/**
+ * Method for buying the computer 
+ * check if the total balance is sufficient enough  
+ */
+function buyComputer(){
+    let priceBuy = Number(price.innerText);
+    let totalBalanCalc = Number(totalBalance.innerText);
+    let bankDepositAmount = Number(bankDeposit.innerText);
+    if(totalBalanCalc >= priceBuy){
+        let rest = Number(bankDeposit.innerText) - priceBuy;
+        if(rest < 0){
+            bankDeposit.innerHTML = 0;
+            totalBalance.innerHTML = Number(loanBank.innerText) + rest;
+            loanBank.innerHTML =  Number(loanBank.innerText) + rest;
+            alert("you have bought a new Computer")
+        }else{
+            console.log("price computer " + priceBuy);
+            console.log("bank " + Number(bankDeposit.innerText));
+            bankDepositAmount -= priceBuy;
+            bankDeposit.innerHTML = bankDepositAmount;
+            totalBalance.innerHTML = bankDepositAmount + Number(loanBank.innerText);
+            alert("you have bought a new Computer");
+        }
+ 
+    }
+    else {
+        alert("you cannot buy the computer insufficient amount in total balance")
+    }
+};
+
 loan.addEventListener("click", askLoan);
 work.addEventListener("click", payINcrease);
 bank.addEventListener("click", transferPay);
 payFullLoan.addEventListener("click", payLoanDown);
+dataOutput.addEventListener("change", handleComputerDataChange);
+buy.addEventListener("click", buyComputer);
