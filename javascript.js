@@ -69,5 +69,15 @@ function disableButton() {
     }
 };
 
+/**
+ * Method for increasing the pay when user work  
+ */
+function payINcrease() {
+    let payincrease = Number(pay.innerText) + salary;
+    pay.innerHTML = payincrease;
+
+}
+
+
 
 loan.addEventListener("click", askLoan);
