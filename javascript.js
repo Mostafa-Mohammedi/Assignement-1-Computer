@@ -77,7 +77,38 @@ function payINcrease() {
     pay.innerHTML = payincrease;
 
 }
+/**
+ * Method for transfering money from the pay to the bank.
+ * If user has loan the money will be deducted from the pay
+ */
 
+function transferPay() {
+    let bankDepositCalc = Number(bankDeposit.innerText);
+    let totalBalanCalc = Number(totalBalance.innerText);
+    let totalTransfer = Number(pay.innerText) + Number(bankDeposit.innerText);
+    let payTransfer = (Number(pay.innerText) * 0.1);
+    if (Number(loanBank.innerText) > 0) {
+        bankDepositCalc += (totalTransfer - payTransfer);
+        bankDeposit.innerHTML = (totalTransfer - payTransfer);
+        loanBank.innerHTML = (Number(loanBank.innerText) - payTransfer);
+        totalBalance.innerHTML = Number(bankDeposit.innerHTML) + Number(loanBank.innerHTML);
+        pay.innerHTML = 0;
+        if (loanBank.innerText <= 0) {
+            loan.disabled = false;
+        }
+    }
 
+    else {
+        bankDepositCalc += totalTransfer;
+        totalBalanCalc += Number(pay.innerText);
+
+        bankDeposit.innerHTML = totalTransfer;
+        totalBalance.innerHTML = totalBalanCalc;
+        pay.innerHTML = 0;
+    }
+
+}
 
 loan.addEventListener("click", askLoan);
+work.addEventListener("click", payINcrease);
+bank.addEventListener("click", transferPay);
