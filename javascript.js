@@ -18,6 +18,18 @@ const buy = document.getElementById("buy");
 const salary = 100;
 payFullLoan.style.visibility = 'hidden';
 payFullLoan.disabled = true;
+let computerApi = [];
+
+/**
+ * Fetch data api and send the data to the computerApi array
+ */
+fetch('https://hickory-quilled-actress.glitch.me/computers')
+    .then(response => response.json())
+    .then(data => computerApi = data)
+    .then(computers => addComputersData(computerApi))
+    .catch(error => {
+        console.error('Error fetching data:', error);
+    });
 
 /**
  * Method for asking the user for loan
@@ -109,6 +121,50 @@ function transferPay() {
 
 }
 
+/**
+ * Method for paying down the loan
+ * Disabled the payfull loan
+ * Check the difference and calculate the difference and show the output 
+ */
+
+function payLoanDown() {
+    let payWork = Number(pay.innerText);
+    let bankDep = Number(bankDeposit.innerText);
+    let sum = payWork - Number(loanBank.innerText);
+    if (Number(loanBank.innerText) > 0 && sum > 0) {
+        pay.innerHTML = 0;
+        loanBank.innerHTML = 0;
+        bankDeposit.innerHTML = bankDep + sum;
+        totalBalance.innerHTML = bankDeposit.innerText;
+        loan.disabled = false;
+        payFullLoan.style.visibility = "hidden";
+        payFullLoan.disabled = true;
+    }
+
+}
+
+/**
+ * Method for taking the APi data and displaying the data.
+ * Add the initial value
+ * @param {*} computers 
+ */
+
+const addComputersData = (computers) => {
+    computers.forEach(x => addComputersDataToSelect(x));
+    dataSpec.innerText = computerApi[0].description;
+    img.src = `https://hickory-quilled-actress.glitch.me/${computerApi[0].image}`;
+    price.innerHTML = computerApi[0].price;
+    laptopHeader.innerHTML = computerApi[0].title;
+
+    for (let index = 0; index < computerApi[0].specs.length; index++) {
+        console.log(computerApi[0].specs[index]);
+        const p = document.createElement("p");
+        p.innerText = computerApi[0].specs[index];
+        def.appendChild(p);
+    }
+}
+
 loan.addEventListener("click", askLoan);
 work.addEventListener("click", payINcrease);
 bank.addEventListener("click", transferPay);
+payFullLoan.addEventListener("click", payLoanDown);
