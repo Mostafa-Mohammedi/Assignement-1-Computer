@@ -6,7 +6,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Computer store</title>
 </head>
-<body>
-    
+<body class="body">
+    <header class="header">
+        <h1>Computer store</h1>
+    </header>
+    <main class="main">
+        <!-- Bank -->
+        <section class="main-bank-section">
+            <h3>Joe Banker</h3>
+            <p class="paragraph-header"><span>Balance</span> <span id="bank-deposit">100</span> kr</p>
+            <p> loan <span id="loan-bank">0</span> kr total balance <span id="totalBalance">100</span> kr</p>
+            <section class="main-bank-button">
+            <button id="loan">Get a loan</button>
+            <button id="pay-full-loan">pay full loan</button>
+        </section>
+        </section>
+
+        <!-- Work -->
+        <section class="main-work-section">
+            <h3>Work</h3>
+            <p id="paragraph-header">Pay <span id="pay">0</span> kr</p>
+            <section class="main-work-button">
+            <button id="bank">Bank</button>
+            <button id="work">Work</button>
+        </section>
+        </section>
+
+        <!-- Laptop system -->
+        <section class="laptops-section">
+            <h3>Laptops</h3>
+            <select id="get-data-api"></select>
+            <p id="data-output">default value</p>
+        </section>
+    </main>
+    <footer>
+        <!-- Default showe case -->
+        <section class="main-laptops-section">
+            <img src="" id="img">
+            <section class="main-laptops-main-content">
+                <h3 id="laptop-header"></h3>
+                <p id="default"></p>
+            </section>
+            <section class="price-button">
+                <p id="price-paragraph"><span id="price"></span><span> NOK</span></p>
+                <button id="buy">BUY NOW</button>
+            </section>
+        </section>
+    </footer>
+    <script src="javascript.js"></script>
 </body>
 </html>
