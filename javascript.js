@@ -32,4 +32,27 @@ function askLoan() {
         calculateLoan(loanSum);
 };
 
+/**
+ * Method for calculate loan.¨
+ * Task the parameter from the askLoan method and check if it is null or NaN.
+ * Check if the loan isnt more than twice as the total balance
+ * calls the disabledButton to disable the button. 
+ * @param {*} loan take the user loan as a parameter
+ */
+function calculateLoan(loan) {
+
+    const totalLoan = Number(bankDeposit.innerText) * 2;
+    if (loan != null || loan != NaN) {
+        if (loan <= totalLoan) {
+            loanBank.innerHTML = String(loan.toFixed(2));
+            totalBalance.innerHTML = String((loan + Number(bankDeposit.innerText)).toFixed(2));
+            disableButton();
+
+        } else {
+            alert(`you cannot loan more then ${totalLoan}`);
+        }
+    } 
+
+};
+
 loan.addEventListener("click", askLoan);
