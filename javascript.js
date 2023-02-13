@@ -55,4 +55,19 @@ function calculateLoan(loan) {
 
 };
 
+/**
+ * Method for disabling the button so the user cant loan more than once
+ * Check if loan is more then o it will disable the loan button
+ * Show the pay full button
+ */
+
+function disableButton() {
+    if (Number(loanBank.innerText) > 0) {
+        loan.disabled = true;
+        payFullLoan.style.visibility = "visible";
+        payFullLoan.disabled = false;
+    }
+};
+
+
 loan.addEventListener("click", askLoan);
