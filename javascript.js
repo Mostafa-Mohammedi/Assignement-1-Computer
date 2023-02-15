@@ -59,7 +59,6 @@ function calculateLoan(loan) {
             loanBank.innerHTML = String(loan.toFixed(2));
             totalBalance.innerHTML = String((loan + Number(bankDeposit.innerText)).toFixed(2));
             disableButton();
-
         } else {
             alert(`you cannot loan more then ${totalLoan}`);
         }
