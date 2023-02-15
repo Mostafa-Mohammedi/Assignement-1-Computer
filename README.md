@@ -1,4 +1,4 @@
-# Assignement-1-Computer
+# Assignment-1-Computer
 
 Computer store program for buying computer from salary.
 
@@ -9,4 +9,4 @@ Work – an area to increase your earnings and deposit cash into your bank balan
 Laptops – an area to select and display information about the merchandise
 
 
-![computer](computer.png)
+![computer](/computer.png)
