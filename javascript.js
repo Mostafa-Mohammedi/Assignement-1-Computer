@@ -130,7 +130,7 @@ function payLoanDown() {
     let payWork = Number(pay.innerText);
     let bankDep = Number(bankDeposit.innerText);
     let sum = payWork - Number(loanBank.innerText);
-    if (Number(loanBank.innerText) > 0 && sum > 0) {
+    if (Number(loanBank.innerText) >= 0 && sum >= 0) {
         pay.innerHTML = 0;
         loanBank.innerHTML = 0;
         bankDeposit.innerHTML = bankDep + sum;
@@ -156,7 +156,6 @@ const addComputersData = (computers) => {
     laptopHeader.innerHTML = computerApi[0].title;
 
     for (let index = 0; index < computerApi[0].specs.length; index++) {
-        console.log(computerApi[0].specs[index]);
         const p = document.createElement("p");
         p.innerText = computerApi[0].specs[index];
         def.appendChild(p);
@@ -215,8 +214,6 @@ function buyComputer(){
             loanBank.innerHTML =  Number(loanBank.innerText) + rest;
             alert("you have bought a new Computer")
         }else{
-            console.log("price computer " + priceBuy);
-            console.log("bank " + Number(bankDeposit.innerText));
             bankDepositAmount -= priceBuy;
             bankDeposit.innerHTML = bankDepositAmount;
             totalBalance.innerHTML = bankDepositAmount + Number(loanBank.innerText);
